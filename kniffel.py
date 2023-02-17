@@ -1,8 +1,8 @@
-import random
 import os
+import random
 import time
 
-numberTheUserWillSave = [0,0,0,0,0]
+numberTheUserWillSave = [0, 0, 0, 0, 0]
 randomBoolNoOneCares = False
 
 # [0] = how many 1 the user got and will save in the points
@@ -12,27 +12,44 @@ randomBoolNoOneCares = False
 # [5] = how many 5 the user got and will save in the points
 # [6] = how many 6 the user got and will save in the points
 # ...
-points = ["X","X","X","X","X","X","X","X","X","X","X","X","X"]
+points = ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"]
 userKniffelCards = []
-itemsTheUserWillKeep = [0,0,0,0,0]
+itemsTheUserWillKeep = [0, 0, 0, 0, 0]
 indexOfItem = 0
-
 
 
 def KI():
     return None
+
+
 def KIStartPlay():
 
     return None
     # donerolls = DiceRoll()
-    # singleDiceRow = diceToSavedNumber(donerolls,numberTheUserWillSave,itemsTheUserWillKeep)   
+    # singleDiceRow = diceToSavedNumber(donerolls,numberTheUserWillSave,itemsTheUserWillKeep)
 
     # diceSaver(donerolls, i,numberTheUserWillSave,itemsTheUserWillKeep)
 
-    
     return None
+
+
 class KniffelCard:
-    def __init__(self,howManyOne,howManyTwo,howManyThree,howManyFour,howManyFive,howManySix,countTripplePash,countFourPash,countFullHouse,countSmallStreet,countBigStreet,countKniffel,countChance):
+    def __init__(
+        self,
+        howManyOne,
+        howManyTwo,
+        howManyThree,
+        howManyFour,
+        howManyFive,
+        howManySix,
+        countTripplePash,
+        countFourPash,
+        countFullHouse,
+        countSmallStreet,
+        countBigStreet,
+        countKniffel,
+        countChance,
+    ):
         self.howManyOne = howManyOne
         self.howManyTwo = howManyTwo
         self.howManyThree = howManyThree
@@ -47,17 +64,22 @@ class KniffelCard:
         self.countKniffel = countKniffel
         self.countChance = countChance
 
+
 def clear_output():
-    os.system('cls' if os.name == 'nt' else 'clear')
-#Returns the total sum of a list. If the list contains a string, only an arbitrary integer is returned as value
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+# Returns the total sum of a list. If the list contains a string, only an arbitrary integer is returned as value
 def SumIntegers(lst):
     total = 0
     for element in lst:
         if isinstance(element, int):
             total += element
     return total
-def CheckBonusUpperArea(kniffelCardNrOne:KniffelCard):
-#region List to add for the scoreboard
+
+
+def CheckBonusUpperArea(kniffelCardNrOne: KniffelCard):
+    # region List to add for the scoreboard
     listWithCardInfo = []
     listWithCardInfo.append(kniffelCardNrOne.howManyOne)
     listWithCardInfo.append(kniffelCardNrOne.howManyTwo)
@@ -72,15 +94,17 @@ def CheckBonusUpperArea(kniffelCardNrOne:KniffelCard):
     # listWithCardInfo.append(kniffelCardNrOne.countBigStreet)
     # listWithCardInfo.append(kniffelCardNrOne.countKniffel)
     # listWithCardInfo.append(kniffelCardNrOne.countChance)
-    #endregion    
-    if SumIntegers(listWithCardInfo[0:5]) >= 63: 
+    # endregion
+    if SumIntegers(listWithCardInfo[0:5]) >= 63:
         return 35
     else:
-        return 0   
-#Printing the Scoreboard at the 
-def PrintPoins(kniffelCardNrOne:KniffelCard):
+        return 0
+
+
+# Printing the Scoreboard at the
+def PrintPoins(kniffelCardNrOne: KniffelCard):
     clear_output()
-    #region List to add for the scoreboard
+    # region List to add for the scoreboard
     listWithCardInfo = []
     listWithCardInfo.append(kniffelCardNrOne.howManyOne)
     listWithCardInfo.append(kniffelCardNrOne.howManyTwo)
@@ -95,8 +119,9 @@ def PrintPoins(kniffelCardNrOne:KniffelCard):
     listWithCardInfo.append(kniffelCardNrOne.countBigStreet)
     listWithCardInfo.append(kniffelCardNrOne.countKniffel)
     listWithCardInfo.append(kniffelCardNrOne.countChance)
-    #endregion
-    print(f"""
+    # endregion
+    print(
+        f"""
 
 1: count only one: {listWithCardInfo[0]}
 2: count only two: {listWithCardInfo[1]}
@@ -105,7 +130,7 @@ def PrintPoins(kniffelCardNrOne:KniffelCard):
 5: count only five: {listWithCardInfo[4]}
 6: count only six: {listWithCardInfo[5]}
 ----------------------------------------
-            bonus: {CheckBonusUpperArea(kniffelCardNrOne)} 
+            bonus: {CheckBonusUpperArea(kniffelCardNrOne)}
 entire upper area: {SumIntegers(listWithCardInfo)}
 
 7: count Tripple Pash: {listWithCardInfo[6]}
@@ -120,20 +145,25 @@ entire lower area: {SumIntegers(listWithCardInfo)}
 
 
 
-""")
-#Check how many singel dice exist
-def CheckHowOftenExist(givenWorth,donerolls):
+"""
+    )
+
+
+# Check how many singel dice exist
+def CheckHowOftenExist(givenWorth, donerolls):
     summary = 0
     for number in donerolls:
         if number == givenWorth:
-            summary= summary+number
+            summary = summary + number
     return summary
-#Shows how the dice looks like
+
+
+# Shows how the dice looks like
 def PrintDice(rolls):
-    dice = ["","","","","","",""]
+    dice = ["", "", "", "", "", "", ""]
     for i in rolls:
         diceNumber = []
-        match(i):
+        match (i):
             case 1:
                 diceNumber.append("┌─────────┐")
                 diceNumber.append("│         │")
@@ -176,64 +206,78 @@ def PrintDice(rolls):
         dice[3] += diceNumber[3] + "   "
         dice[4] += diceNumber[4] + "   "
     return dice
-#Return the dice values
-def DiceRoll(): 
-    #fill the List with random dice
+
+
+# Return the dice values
+def DiceRoll():
+    # fill the List with random dice
     return [random.randint(1, 6) for i in range(5)]
-#Check for 3 and 2 same dices
+
+
+# Check for 3 and 2 same dices
 def FullHousCheck(donerolls):
     counts = [donerolls.count(i) for i in range(1, 7)]
     return 25 if 2 in counts and 3 in counts else 0
-#Sum all numbers
+
+
+# Sum all numbers
 def ChanceCheck(donerolls):
     return sum(donerolls)
-#Ckechs if every dice got the same number
+
+
+# Ckechs if every dice got the same number
 def KniffelCheck(donerolls):
     return 50 if donerolls[0] == donerolls[4] else 0
-#Check if small (4) or big (5) street
-def StreetCheck(big, donerolls):
+
+
+# Check if small (4) or big (5) street
+def StreetCheck(big, donerolls: list):
     counterForList = 0
     counterForStreetLenth = 0
     donerolls.sort()
     for dice in donerolls:
-        try:
-            if len(donerolls) <= counterForStreetLenth or counterForList >= 5:
-                break
-        except:
-            if dice == donerolls[counterForList+1]-1:
-                counterForStreetLenth += 1
-        if counterForList >= 4:
-            counterForList -=1
-        if dice == donerolls[counterForList+1]-1:
-                counterForStreetLenth += 1
-        counterForList +=1
 
-    if counterForStreetLenth >=4 and big:
+        if len(donerolls) <= counterForStreetLenth or counterForList >= 5:
+            break
+        if dice == donerolls[counterForList + 1] - 1:
+            counterForStreetLenth += 1
+        if counterForList >= 4:
+            counterForList -= 1
+        if dice == donerolls[counterForList + 1] - 1:
+            counterForStreetLenth += 1
+        counterForList += 1
+
+    if counterForStreetLenth >= 4 and big:
         return 40
-    
-    elif counterForStreetLenth >=3 and not big:
+
+    elif counterForStreetLenth >= 3 and not big:
         return 25
     else:
         return 0
-#Check if a Pash does exist
-def PashCheck(worth,donerolls):
+
+
+# Check if a Pash does exist
+def PashCheck(worth, donerolls):
     which_number = int(input("Which number you want to save? "))
     count = donerolls.count(which_number)
     return sum(donerolls) if count >= worth - 4 else 0
-#Manage the points (Where the User will safe the values)
-def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
+
+
+# Manage the points (Where the User will safe the values)
+def PointSystem(kniffelCardNrOne: KniffelCard, donerolls):
     while True:
-        if not isinstance(kniffelCardNrOne,(int)):
+        if not isinstance(kniffelCardNrOne, (int)):
             x = input("Wo willst du es hinspeichern")
             try:
                 x = int(x)
-            except:
+            except ValueError:
+
                 print(f"your input '({x})' is not a number")
-                time.sleep(5)
-            match(x):
+                time.sleep(2)
+            match (x):  # noqa
                 case 1:
                     if kniffelCardNrOne.howManyOne == "X":
-                        kniffelCardNrOne.howManyOne = CheckHowOftenExist(x,donerolls)
+                        kniffelCardNrOne.howManyOne = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -241,7 +285,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 2:
                     if kniffelCardNrOne.howManyTwo == "X":
-                        kniffelCardNrOne.howManyTwo = CheckHowOftenExist(x,donerolls)
+                        kniffelCardNrOne.howManyTwo = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -249,7 +293,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 3:
                     if kniffelCardNrOne.howManyThree == "X":
-                        kniffelCardNrOne.howManyThree = CheckHowOftenExist(x,donerolls)
+                        kniffelCardNrOne.howManyThree = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -257,7 +301,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 4:
                     if kniffelCardNrOne.howManyFour == "X":
-                        kniffelCardNrOne.howManyFour = CheckHowOftenExist(x,donerolls)
+                        kniffelCardNrOne.howManyFour = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -265,15 +309,15 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 5:
                     if kniffelCardNrOne.howManyFive == "X":
-                        kniffelCardNrOne.howManyFive = CheckHowOftenExist(x,donerolls)
+                        kniffelCardNrOne.howManyFive = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
                         time.sleep(3)
                         continue
                 case 6:
-                    if  kniffelCardNrOne.howManySix == "X":
-                        kniffelCardNrOne.howManySix = CheckHowOftenExist(x,donerolls)
+                    if kniffelCardNrOne.howManySix == "X":
+                        kniffelCardNrOne.howManySix = CheckHowOftenExist(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -281,7 +325,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 7:
                     if kniffelCardNrOne.countTripplePash == "X":
-                        kniffelCardNrOne.countTripplePash = PashCheck(x,donerolls)
+                        kniffelCardNrOne.countTripplePash = PashCheck(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -289,7 +333,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 8:
                     if kniffelCardNrOne.countFourPash == "X":
-                        kniffelCardNrOne.countFourPash= PashCheck(x,donerolls)
+                        kniffelCardNrOne.countFourPash = PashCheck(x, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -305,7 +349,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 10:
                     if kniffelCardNrOne.countSmallStreet == "X":
-                        kniffelCardNrOne.countSmallStreet = StreetCheck(False,donerolls)
+                        kniffelCardNrOne.countSmallStreet = StreetCheck(False, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -313,7 +357,7 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
                         continue
                 case 11:
                     if kniffelCardNrOne.countBigStreet == "X":
-                        kniffelCardNrOne.countBigStreet = StreetCheck(True,donerolls)
+                        kniffelCardNrOne.countBigStreet = StreetCheck(True, donerolls)
                         break
                     else:
                         print("There are allready points.")
@@ -343,87 +387,92 @@ def PointSystem(kniffelCardNrOne:KniffelCard, donerolls):
         else:
             print(f"Deine Punktzahl ist {sum(points)}.")
             input("Drücke um weiter zu spielen")
-            break         
-def diceSaver(donerolls, i,numberTheUserWillSave,itemsTheUserWillKeep):
+            break
+
+
+def diceSaver(donerolls, i, numberTheUserWillSave, itemsTheUserWillKeep):
     try:
         savedDice = input("Wilst du einen Würfel behalten? (1, 2, 3, 4, 5 oder 'N')")
         for dice in savedDice.split(" "):
-            #merkt sich was gespeichert werden soll
-            itemsTheUserWillKeep[int(dice)-1] = donerolls[int(dice)-1]
+            # merkt sich was gespeichert werden soll
+            itemsTheUserWillKeep[int(dice) - 1] = donerolls[int(dice) - 1]
             indexOfItem = 0
             for keptItems in itemsTheUserWillKeep:
                 match keptItems:
                     case 1:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
+                        indexOfItem += 1
                     case 2:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
+                        indexOfItem += 1
                     case 3:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
+                        indexOfItem += 1
                     case 4:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
+                        indexOfItem += 1
                     case 5:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
-                    case 6: 
+                        indexOfItem += 1
+                    case 6:
                         numberTheUserWillSave[int(indexOfItem)] = donerolls[int(indexOfItem)]
-                        indexOfItem+=1
+                        indexOfItem += 1
                         continue
                     case 0:
-                        indexOfItem+=1
+                        indexOfItem += 1
                         continue
                     case _:
-                        indexOfItem+=1
+                        indexOfItem += 1
                         continue
-    except:
-        i +=1
-def diceToSavedNumber(donerolls,numberTheUserWillSave,itemsTheUserWillKeep):
+    except ValueError:
+        i += 1
+
+
+def diceToSavedNumber(donerolls, numberTheUserWillSave, itemsTheUserWillKeep):
     indexOfItem = 0
     for saved in numberTheUserWillSave:
         if saved != int(0):
             donerolls[indexOfItem] = saved
             numberTheUserWillSave[indexOfItem] = 0
             itemsTheUserWillKeep[indexOfItem] = 0
-        indexOfItem = indexOfItem+1
+        indexOfItem = indexOfItem + 1
     singleDiceRow = PrintDice(donerolls)
-    return singleDiceRow            
+    return singleDiceRow
+
+
 def GameStart():
-    KIPlaying:bool = False
+    KIPlaying: bool = False
     amountOfPlayers = int(input("wie viele spiele wollen spielen oder Computer (999)"))
     if amountOfPlayers == 999:
         KI()
         amountOfPlayers = 2
         KIPlaying = True
-    
+
     playerCounter = 0
-    savedDice = 1
     rounds = 1
-    kniffelCard = KniffelCard("X","X","X","X","X","X","X","X","X","X","X","X","X")
+    kniffelCard = KniffelCard("X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X")
     kniffelCardList = []
     for x in range(amountOfPlayers):
-        kniffelCardList.append(KniffelCard("X","X","X","X","X","X","X","X","X","X","X","X","X"))
+        kniffelCardList.append(KniffelCard("X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"))
     while rounds <= 5:
         print(f"Du bist in Runde: {rounds}")
         donerolls = []
-        numberTheUserWillSave = [0,0,0,0,0]
-        itemsTheUserWillKeep = [0,0,0,0,0]
+        numberTheUserWillSave = [0, 0, 0, 0, 0]
+        itemsTheUserWillKeep = [0, 0, 0, 0, 0]
         i = 1
         while i <= 3:
             clear_output()
             donerolls = DiceRoll()
-            singleDiceRow = diceToSavedNumber(donerolls,numberTheUserWillSave,itemsTheUserWillKeep)   
+            singleDiceRow = diceToSavedNumber(donerolls, numberTheUserWillSave, itemsTheUserWillKeep)
             print(f"Player {playerCounter+1} is rolling...")
             print(singleDiceRow[0])
             print(singleDiceRow[1])
             print(singleDiceRow[2])
             print(singleDiceRow[3])
-            print(singleDiceRow[4])         
-            diceSaver(donerolls, i,numberTheUserWillSave,itemsTheUserWillKeep)
-            i +=1
-        
+            print(singleDiceRow[4])
+            diceSaver(donerolls, i, numberTheUserWillSave, itemsTheUserWillKeep)
+            i += 1
+
         PrintPoins(kniffelCard)
         PointSystem(kniffelCard, donerolls)
         donerolls = DiceRoll()
@@ -431,8 +480,8 @@ def GameStart():
         if playerCounter == len(kniffelCardList) - 1:
             kniffelCardList[playerCounter] = kniffelCard
             playerCounter = 0
-            rounds+=1
-            kniffelCard = kniffelCardList[playerCounter] 
+            rounds += 1
+            kniffelCard = kniffelCardList[playerCounter]
         else:
             kniffelCardList[playerCounter] = kniffelCard
             playerCounter += 1
@@ -441,10 +490,4 @@ def GameStart():
                 KIStartPlay()
 
 
-
-
 GameStart()
-
-
-
-    
